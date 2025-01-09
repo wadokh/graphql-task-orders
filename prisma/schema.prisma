@@ -19,7 +19,7 @@ model Orders {
   name         String
   createdAt    DateTime?
   productName  String
-  productId    String    @unique
+  productId    String
   quantity     Int?
   price        Float?
   currencyCode String?

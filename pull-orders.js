@@ -108,4 +108,5 @@ while (hasNextPage) {
         break;
     }
 }
+await prisma.$disconnect();
 

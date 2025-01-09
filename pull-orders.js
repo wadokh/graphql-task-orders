@@ -65,24 +65,14 @@ while (hasNextPage) {
             const orderNode = data.data.orders.edges[i]?.node;
             if(!orderNode) break;
             const {id: shopifyId, name, createdAt} = orderNode;
-            console.log(shopifyId);
-            console.log(name);
-            console.log(createdAt);
             const itemsArr = orderNode.lineItems.edges;
-            // console.log(itemsArr);
             const len = itemsArr.length;
             for (let j = 0; j < len; j++) {
-                console.log(j+"test");
                 const productId = itemsArr[j].node.id;
-                console.log(productId);
                 const productName = itemsArr[j].node.name;
-                console.log(productName);
                 const quantity = itemsArr[j].node.currentQuantity;
-                console.log(quantity);
                 const price  = parseFloat(itemsArr[j].node.originalUnitPriceSet.shopMoney.amount);
                 const currencyCode = itemsArr[j].node.originalUnitPriceSet.shopMoney.currencyCode;
-                console.log("Price:" + price);
-                console.log("currency: " + currencyCode);
                 try {
                     await prisma.orders.create({
                         data: {
@@ -96,6 +86,7 @@ while (hasNextPage) {
                             currencyCode,
                         },
                     })
+                    console.log(`Entry with orderId: ${shopifyId} and productId: ${productId} is created successfully.`);
                 } catch (error) {
                     console.log("error inserting data", error);
                 }

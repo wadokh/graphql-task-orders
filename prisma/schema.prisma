@@ -23,4 +23,6 @@ model Orders {
   quantity     Int?
   price        Float?
   currencyCode String?
+
+  @@unique([shopifyId, productId])
 }
